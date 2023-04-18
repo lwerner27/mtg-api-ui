@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import CustomTextInput from '../../Components/CustomTextInput';
+import { useState, useEffect } from 'react';
+import getCardNames from '../../Helpers/getCardNames';
 
 function Home() {
-    const [searchTerm, setSearchTerm] = useState(null);
-    const cardNames = null;
+    const requestURL = 'http://www.mtg-api.com:3000/api/cards/test';
+    const [cardNames, setCardNames] = useState(null);
+
+    useEffect(() => {
+        getCardNames(requestURL, setCardNames);
+    }, []);
 
     return (
         <div className='mx-auto'>
@@ -13,15 +17,13 @@ function Home() {
                 </h1>
                 <div className='form-container w-fit mx-auto flex flex-col'>
                     <label htmlFor='card-search'>Card Name</label>
-                    <CustomTextInput
-                        inputType='Text'
-                        inputId='card-search'
-                        inputPlaceholder='Zur the Enchanter'
-                        additionalClasses={
-                            'mt-1 focus:ring-gray-400 focus:border-gray-400'
-                        }
-                        dataList='cardNames'
-                        inputSetter={setSearchTerm}
+                    <input
+                        type='text'
+                        id='card-search'
+                        placeholder='Zur the Enchanter'
+                        // onChange={handleChange}
+                        list='cardNames'
+                        className='rounded-lg mt-1 focus:ring-gray-400 focus:border-gray-400'
                     />
                     <datalist id='cardNames'>
                         <option value='Zur the Enchanter' />
