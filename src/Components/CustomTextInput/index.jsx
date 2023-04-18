@@ -2,12 +2,11 @@ function CustomTextInput({
     inputId,
     inputType,
     inputPlaceholder,
-    inputSetter,
     dataList,
     additionalClasses,
 }) {
     const handleChange = (event) => {
-        inputSetter(event.target.value);
+        console.log(event.target.value);
     };
 
     return (
